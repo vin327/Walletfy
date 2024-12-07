@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="transactions-container">
+    <h2>Ваши транзакции</h2>
+    {% if transactions %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Описание</th>
+                    <th>Сумма</th>
+                    <th>Категория</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.description }}</td>
+                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.category }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>У вас пока нет транзакций.</p>
+    {% endif %}
+    <a href="{{ url_for('add_transaction') }}" class="btn btn-primary">Добавить транзакцию</a>
+</div>
+{% endblock %}

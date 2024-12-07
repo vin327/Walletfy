@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Профиль</h1>
+    <p>Имя пользователя: {{ current_user.username }}</p>
+    <!-- Удалите или закомментируйте следующую строку, если email не используется -->
+    <!-- <p>Email: {{ current_user.email }}</p> -->
+{% endblock %}

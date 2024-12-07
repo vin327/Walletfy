@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="welcome-container">
+    <div class="welcome-content">
+        <h1>Добро пожаловать в Walletify</h1>
+        {% if current_user.is_authenticated %}
+            <p>Ваш баланс: {{ balance }} руб.</p>
+            <a href="{{ url_for('deposit') }}" class="btn btn-primary">Пополнить баланс</a>
+            <h2>Последние транзакции:</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Описание</th>
+                        <th>Сумма</th>
+                        <th>Категория</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.description }}</td>
+                        <td>{{ transaction.amount }}</td>
+                        <td>{{ transaction.category }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="welcome-text">
+                <p>Пожалуйста, войдите или зарегистрируйтесь, чтобы начать отслеживать свои финансы.</p>
+                <div class="welcome-features">
+                    <div class="feature">
+                        <span class="feature-icon">📊</span>
+                        <h3>Учет расходов</h3>
+                        <p>Отслеживайте все ваши траты</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">💰</span>
+                        <h3>Управление балансом</h3>
+                        <p>Контролируйте свой бюджет</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">📈</span>
+                        <h3>Анализ трат</h3>
+                        <p>Следите за финансовыми целями</p>
+                    </div>
+                </div>
+                <div class="auth-buttons">
+                    <a href="{{ url_for('login') }}" class="welcome-btn btn-login">
+                        <span class="btn-icon">🔐</span>
+                        Войти
+                    </a>
+                    <a href="{{ url_for('register') }}" class="welcome-btn btn-register">
+                        <span class="btn-icon">✨</span>
+                        Регистрация
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
